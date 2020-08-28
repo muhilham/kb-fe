@@ -18,7 +18,7 @@ const Prob = (props) => (
         {props.title}
       </Typography>
       <FormControl variant="outlined">
-        <InputLabel htmlFor="component-outlined">X</InputLabel>
+        <InputLabel htmlFor="component-outlined">{props.inputLabel}</InputLabel>
         <OutlinedInput id="component-outlined" value={props.input} onChange={props.handleInput} label="Name" />
       </FormControl>
       {props.children}
@@ -64,9 +64,17 @@ function App(props) {
   function fibonacciFactorsTo(max) {
     let i
     const fib = []
-
+    if (max < 1) {
+      return fib
+    }
     fib[0] = 0
+    if (max === 1) {
+      return fib
+    }
     fib[1] = 1
+    if (max === 2) {
+      return fib
+    }
     for (i = 2; i < max; i++) {
       fib[i] = fib[i - 2] + fib[i - 1]
     }
@@ -95,7 +103,7 @@ function App(props) {
     }
     const N = parseFloat(event.target.value)
     setFibonacciN(event.target.value)
-    setFibonacciNResult(fibonacciFactorsTo(N).join(','))
+    setFibonacciNResult(!event.target.value.length ? '' : fibonacciFactorsTo(N).join(','))
   }
 
   const sumXY = parseFloat(sumX) + parseFloat(sumY)
@@ -114,6 +122,7 @@ function App(props) {
           <Container>
             <Prob
               title="1.  Sum X & Y, and print the result"
+              inputLabel="X"
               input={sumX}
               handleInput={handleInput(setSumX)}
               result={isNaN(sumXY) ? '' : sumXY}
@@ -126,6 +135,7 @@ function App(props) {
 
             <Prob
               title="2.  Multiply X & Y, and print the result"
+              inputLabel="X"
               input={multiplyX}
               handleInput={handleInput(setMultiplyX)}
               result={isNaN(multiplyXY) ? '' : multiplyXY}
@@ -138,6 +148,7 @@ function App(props) {
 
             <Prob
               title="3.  Find first N prime number, and print the result"
+              inputLabel="N"
               input={nPrime}
               handleInput={handlePrimeN}
               result={nPrimeResult}
@@ -145,6 +156,7 @@ function App(props) {
 
             <Prob
               title="4.  Find the first N Fibonacci sequence, and print the result"
+              inputLabel="N"
               input={nFibonacci}
               handleInput={handleFibonacciN}
               result={nFibonacciResult}
