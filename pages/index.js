@@ -31,7 +31,37 @@ const Prob = (props) => (
   </Paper>
 )
 
-function App(props) {
+function primeFactorsTo(max) {
+  let i = 0
+  const primes = []
+  const isPrime = (num) => {
+    const boundary = Math.floor(Math.sqrt(num))
+    for (let i = 2; i <= boundary; i++) if (num % i === 0) return false
+    return num >= 2
+  }
+  while (primes.length < max) {
+    i += 1
+    if (isPrime(i)) {
+      primes.push(i)
+    }
+  }
+
+  return primes
+}
+
+function fibonacciFactorsTo(max) {
+  if (max < 1) {
+    return []
+  }
+  let i
+  const fib = [0, 1]
+  for (i = 2; i < max; i++) {
+    fib[i] = fib[i - 2] + fib[i - 1]
+  }
+  return fib.filter((data, key) => key <= (max - 1))
+}
+
+function App() {
   const [sumX, setSumX] = React.useState('')
   const [sumY, setSumY] = React.useState('')
   const [nPrime, setPrimeN] = React.useState('')
@@ -42,44 +72,6 @@ function App(props) {
 
   const [multiplyX, setMultiplyX] = React.useState('')
   const [multiplyY, setMultiplyY] = React.useState('')
-
-  function primeFactorsTo(max) {
-    let i = 0
-    const primes = []
-    const isPrime = (num) => {
-      const boundary = Math.floor(Math.sqrt(num))
-      for (let i = 2; i <= boundary; i++) if (num % i === 0) return false
-      return num >= 2
-    }
-    while (primes.length < max) {
-      i++
-      if (isPrime(i)) {
-        primes.push(i)
-      }
-    }
-
-    return primes
-  }
-
-  function fibonacciFactorsTo(max) {
-    let i
-    const fib = []
-    if (max < 1) {
-      return fib
-    }
-    fib[0] = 0
-    if (max === 1) {
-      return fib
-    }
-    fib[1] = 1
-    if (max === 2) {
-      return fib
-    }
-    for (i = 2; i < max; i++) {
-      fib[i] = fib[i - 2] + fib[i - 1]
-    }
-    return fib
-  }
 
   const handleInput = (fn) => (event) => {
     if (isNaN(event.target.value)) {
@@ -127,7 +119,7 @@ function App(props) {
               handleInput={handleInput(setSumX)}
               result={isNaN(sumXY) ? '' : sumXY}
             >
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" style={{ marginLeft: 15 }}>
                 <InputLabel htmlFor="component-outlined">Y</InputLabel>
                 <OutlinedInput id="component-outlined" value={sumY} onChange={handleInput(setSumY)} label="Y" />
               </FormControl>
@@ -140,7 +132,7 @@ function App(props) {
               handleInput={handleInput(setMultiplyX)}
               result={isNaN(multiplyXY) ? '' : multiplyXY}
             >
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" style={{ marginLeft: 15 }}>
                 <InputLabel htmlFor="component-outlined">Y</InputLabel>
                 <OutlinedInput id="component-outlined" value={multiplyY} onChange={handleInput(setMultiplyY)} label="Y" />
               </FormControl>
