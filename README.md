@@ -1,6 +1,6 @@
 ### Run Locally
 
-    git clone http://github.com/muhilham/gc-fe-test.git
+    git clone http://github.com/muhilham/kb-fe.git
     cd FE-TEST
     yarn install
 
@@ -24,10 +24,6 @@ Pages
 
     ...
     ├── pages
-    │   ├── contact
-    │   │   ├── component.js
-    │   │   └── index.js
-    ...
     │   ├── index.js
         └── _document.js
 

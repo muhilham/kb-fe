@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import PhoneBook from 'ducks/PhoneBook'
-import Counter from 'ducks/Counter'
+import ExamplePhoneBook from 'ducks/ExamplePhoneBook'
 
 const appReducers = combineReducers({
-  PhoneBook,
-  Counter,
+  ExamplePhoneBook,
 })
 
 const rootReducers = (state, action) => appReducers(state, action)
